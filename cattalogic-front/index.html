@@ -3,70 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catallogic - Painel do Catálogo</title>
+    <title>Catallogic - Painel Geral</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; color: #0F172A; }
+        .bg-primaria { background-color: #1E293B; }
+        .bg-secundaria { background-color: #0EA5E9; }
+        .text-primaria { color: #1E293B; }
+    </style>
 </head>
-<body class="bg-fundo font-inter text-texto min-h-screen flex">
+<body class="min-h-screen flex">
 
-    <aside class="w-64 bg-primaria text-white flex flex-col p-6 hidden md:flex">
-        <div class="flex items-center gap-3 mb-10">
-            <div class="w-8 h-8 bg-secundaria rounded-lg flex items-center justify-center font-bold text-white">C</div>
-            <span class="text-xl font-bold tracking-wide">Catallogic</span>
+    <aside class="w-64 bg-primaria text-white flex flex-col p-6 hidden md:flex justify-between">
+        <div>
+            <div class="flex items-center gap-3 mb-10">
+                <svg class="w-8 h-8 text-white fill-none stroke-[3]" viewBox="0 0 24 24" stroke="#0EA5E9">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+                <span class="text-xl font-bold tracking-wide">Meu Sistema</span>
+            </div>
+            <nav class="space-y-2">
+                <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white px-4 py-2.5 rounded-lg transition">📊 Dashboard</a>
+                <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white px-4 py-2.5 rounded-lg transition">👥 Clientes</a>
+                <a href="#" class="flex items-center gap-3 bg-slate-700/50 text-white px-4 py-2.5 rounded-lg font-semibold transition border-l-4 border-[#0EA5E9]">📦 Produtos</a>
+                <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white px-4 py-2.5 rounded-lg transition">⚙️ Configurações</a>
+            </nav>
         </div>
-        <nav class="space-y-4">
-            <a href="#" class="flex items-center gap-3 bg-secundaria text-white px-4 py-2.5 rounded-lg font-semibold transition">
-                📦 Produtos
-            </a>
-        </nav>
+        <div>
+            <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white px-4 py-2.5 transition">🚪 Sair</a>
+        </div>
     </aside>
 
     <main class="flex-1 p-6 md:p-10 max-w-7xl mx-auto w-full">
-        <header class="flex justify-between items-center mb-8 border-b border-gray-200 pb-4">
-            <h1 class="text-2xl md:text-3xl font-bold text-primaria">Painel Geral</h1>
-            <div class="flex items-center gap-3">
-                <span class="text-sm font-medium bg-gray-200 px-3 py-1 rounded-full text-primaria">Modo Administrador</span>
+        <header class="flex justify-between items-center mb-8 bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+            <div class="w-96">
+                <input type="text" placeholder="Pesquisar..." class="w-full bg-slate-50 px-4 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-secundaria">
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="relative p-1 text-gray-400 hover:text-gray-600">🔔</button>
+                <div class="flex items-center gap-2 border-l pl-4">
+                    <div class="w-8 h-8 bg-slate-200 rounded-full flex items-center justify-center font-bold text-sm text-slate-600">JF</div>
+                    <span class="text-sm font-medium text-slate-700">Meu Perfil</span>
+                </div>
             </div>
         </header>
 
+        <div class="mb-4">
+            <h1 class="text-2xl font-bold text-primaria">Dashboard <span class="text-gray-400 font-normal text-lg">/ Visão Geral</span></h1>
+        </div>
+
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <section class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 lg:col-span-1 h-fit">
-                <h2 class="text-lg font-bold text-primaria mb-4">Cadastrar Novo Produto</h2>
+                <h2 class="text-lg font-bold text-primaria mb-4">Adicionar ao Catálogo</h2>
                 <form id="produtoForm" class="space-y-4">
                     <div>
-                        <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Nome do Produto</label>
-                        <input type="text" id="nome" required class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-secundaria transition">
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Nome do Produto</label>
+                        <input type="text" id="nome" required class="w-full px-3 py-2 bg-slate-50 border border-gray-200 rounded-lg focus:outline-none focus:border-secundaria transition">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Descrição</label>
-                        <textarea id="descricao" rows="2" class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-secundaria transition"></textarea>
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Preço (R$)</label>
+                        <input type="number" id="preco" step="0.01" required class="w-full px-3 py-2 bg-slate-50 border border-gray-200 rounded-lg focus:outline-none focus:border-secundaria transition">
                     </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Preço (R$)</label>
-                            <input type="number" id="preco" step="0.01" required class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-secundaria transition">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Estoque</label>
-                            <input type="number" id="quantidadeEstoque" required class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-secundaria transition">
-                        </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Estoque Inicial</label>
+                        <input type="number" id="estoque" required class="w-full px-3 py-2 bg-slate-50 border border-gray-200 rounded-lg focus:outline-none focus:border-secundaria transition">
                     </div>
-                    <button type="submit" class="w-full bg-secundaria hover:bg-sky-600 text-white font-semibold py-2.5 rounded-lg shadow-md hover:shadow-lg transition duration-200 mt-2">
-                        Salvar Produto
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Status Inicial</label>
+                        <select id="status" class="w-full px-3 py-2 bg-slate-50 border border-gray-200 rounded-lg focus:outline-none focus:border-secundaria transition">
+                            <option value="RASCUNHO">RASCUNHO (Em criação)</option>
+                            <option value="ATIVO" selected>ATIVO (Visível no catálogo)</option>
+                            <option value="INATIVO">INATIVO (Oculto temporariamente)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-secundaria hover:bg-sky-600 text-white font-semibold py-2.5 rounded-lg shadow-sm transition mt-2">
+                        + Adicionar Produto
                     </button>
                 </form>
             </section>
 
             <section class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 lg:col-span-2">
-                <h2 class="text-lg font-bold text-primaria mb-4">Últimos Produtos Cadastrados</h2>
+                <h2 class="text-lg font-bold text-primaria mb-4">Últimas Atividades</h2>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="border-b border-gray-100 text-xs font-bold uppercase tracking-wider text-gray-400 bg-gray-50">
+                            <tr class="border-b border-gray-100 text-xs font-bold text-gray-400 bg-slate-50">
+                                <th class="py-3 px-4">ID</th>
                                 <th class="py-3 px-4">Nome</th>
                                 <th class="py-3 px-4">Preço</th>
                                 <th class="py-3 px-4">Estoque</th>
+                                <th class="py-3 px-4">Status</th>
                                 <th class="py-3 px-4 text-center">Ações</th>
                             </tr>
                         </thead>

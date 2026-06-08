@@ -11,11 +11,43 @@
         .bg-primaria { background-color: #1E293B; }
         .bg-secundaria { background-color: #0EA5E9; }
         .text-primaria { color: #1E293B; }
+        /* Classe utilitária para esconder seções */
+        .secao-oculta { display: none !important; }
     </style>
+    <div id="modal-perfil" class="secao-oculta fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 animate-fade-in">
+    <div class="bg-white rounded-xl shadow-xl border border-gray-100 w-full max-w-md p-6 relative">
+        <button id="btn-fechar-perfil" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-lg">✕</button>
+        
+        <div class="flex flex-col items-center border-b border-gray-100 pb-4 mb-4">
+            <div class="w-20 h-20 bg-slate-200 rounded-full flex items-center justify-center font-bold text-2xl text-slate-600 mb-3">JF</div>
+            <h3 id="perfil-nome" class="text-xl font-bold text-slate-800">Carregando...</h3>
+            <p id="perfil-role" class="text-xs font-semibold bg-sky-50 text-[#0EA5E9] px-2.5 py-0.5 rounded-full mt-1 uppercase tracking-wider">ADMINISTRADOR</p>
+        </div>
+
+        <div class="space-y-3 text-sm">
+            <div>
+                <label class="block text-xs font-bold text-gray-400 uppercase">ID do Usuário</label>
+                <p id="perfil-id" class="text-slate-700 font-mono mt-0.5">#001</p>
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-gray-400 uppercase">E-mail Cadastrado</label>
+                <p id="perfil-email" class="text-slate-700 mt-0.5">carregando...</p>
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-gray-400 uppercase">Permissão do Perfil</label>
+                <p class="text-slate-700 mt-0.5">Gerenciar Catálogo Completo</p>
+            </div>
+        </div>
+
+        <button id="btn-modal-sair" class="w-full mt-6 bg-slate-100 hover:bg-red-50 hover:text-red-600 text-slate-600 font-semibold py-2 rounded-lg transition text-sm">
+            Desconectar da Conta
+        </button>
+    </div>
+</div>
 </head>
 <body class="min-h-screen flex">
 
-    <aside class="w-64 bg-primaria text-white flex flex-col p-6 hidden md:flex justify-between">
+    <aside class="w-64 bg-primaria text-white flex flex-col p-6 hidden md:flex justify-between shrink-0">
         <div>
             <div class="flex items-center gap-3 mb-10">
                 <svg class="w-8 h-8 text-white fill-none stroke-[3]" viewBox="0 0 24 24" stroke="#0EA5E9">
@@ -23,37 +55,86 @@
                 </svg>
                 <span class="text-xl font-bold tracking-wide">Meu Sistema</span>
             </div>
-            <nav class="space-y-2">
-                <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white px-4 py-2.5 rounded-lg transition">📊 Dashboard</a>
-                <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white px-4 py-2.5 rounded-lg transition">👥 Clientes</a>
-                <a href="#" class="flex items-center gap-3 bg-slate-700/50 text-white px-4 py-2.5 rounded-lg font-semibold transition border-l-4 border-[#0EA5E9]">📦 Produtos</a>
-                <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white px-4 py-2.5 rounded-lg transition">⚙️ Configurações</a>
+            <nav class="space-y-2" id="menuLateral">
+                <button id="btn-dashboard" class="w-full flex items-center gap-3 text-white bg-slate-700/50 px-4 py-2.5 rounded-lg font-semibold transition border-l-4 border-[#0EA5E9]">📊 Dashboard</button>
+                <button id="btn-clientes" class="w-full flex items-center gap-3 text-gray-400 hover:text-white px-4 py-2.5 rounded-lg transition border-l-4 border-transparent">👥 Clientes</button>
+                <button id="btn-produtos" class="w-full flex items-center gap-3 text-gray-400 hover:text-white px-4 py-2.5 rounded-lg transition border-l-4 border-transparent">📦 Produtos</button>
+                <button id="btn-configuracoes" class="w-full flex items-center gap-3 text-gray-400 hover:text-white px-4 py-2.5 rounded-lg transition border-l-4 border-transparent">⚙️ Configurações</button>
             </nav>
         </div>
         <div>
-            <a href="#" class="flex items-center gap-3 text-gray-400 hover:text-white px-4 py-2.5 transition">🚪 Sair</a>
+            <a href="login.html" class="flex items-center gap-3 text-gray-400 hover:text-white px-4 py-2.5 transition">🚪 Sair</a>
         </div>
     </aside>
 
-    <main class="flex-1 p-6 md:p-10 max-w-7xl mx-auto w-full">
+    <main class="flex-1 p-6 md:p-10 max-w-7xl mx-auto w-full overflow-y-auto">
         <header class="flex justify-between items-center mb-8 bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-            <div class="w-96">
-                <input type="text" placeholder="Pesquisar..." class="w-full bg-slate-50 px-4 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-secundaria">
-            </div>
             <div class="flex items-center gap-4">
-                <button class="relative p-1 text-gray-400 hover:text-gray-600">🔔</button>
-                <div class="flex items-center gap-2 border-l pl-4">
-                    <div class="w-8 h-8 bg-slate-200 rounded-full flex items-center justify-center font-bold text-sm text-slate-600">JF</div>
-                    <span class="text-sm font-medium text-slate-700">Meu Perfil</span>
-                </div>
-            </div>
+    <button class="relative p-1 text-gray-400 hover:text-gray-600">🔔</button>
+    <div id="btn-perfil-topo" class="flex items-center gap-2 border-l pl-4 cursor-pointer hover:opacity-80 transition">
+        <div class="w-8 h-8 bg-slate-200 rounded-full flex items-center justify-center font-bold text-sm text-slate-600">JF</div>
+        <span class="text-sm font-medium text-slate-700">Meu Perfil</span>
+    </div>
+</div>
         </header>
 
-        <div class="mb-4">
+        <div id="conteudo-dashboard" class="secao-conteudo space-y-6">
             <h1 class="text-2xl font-bold text-primaria">Dashboard <span class="text-gray-400 font-normal text-lg">/ Visão Geral</span></h1>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex justify-between items-center">
+                    <div>
+                        <p class="text-sm font-medium text-gray-400">Total de Vendas</p>
+                        <h3 class="text-2xl font-bold text-slate-800 mt-1">R$ 12.500,00</h3>
+                    </div>
+                    <div class="w-12 h-12 bg-sky-50 text-[#0EA5E9] rounded-xl flex items-center justify-center font-bold text-xl">＄</div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex justify-between items-center">
+                    <div>
+                        <p class="text-sm font-medium text-gray-400">Novos Clientes</p>
+                        <h3 class="text-2xl font-bold text-slate-800 mt-1">45 este mês</h3>
+                    </div>
+                    <div class="w-12 h-12 bg-green-50 text-green-600 rounded-xl flex items-center justify-center text-xl">👥</div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                <h2 class="text-lg font-bold text-primaria mb-4">Últimas Atividades Administrativas</h2>
+                <p class="text-gray-500 text-sm">Bem-vindo ao centro administrativo do Catallogic. Use o menu lateral para gerenciar o estoque de mercadorias ou verificar contas ativas.</p>
+            </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div id="conteudo-clientes" class="secao-conteudo secao-oculta space-y-6">
+            <h1 class="text-2xl font-bold text-primaria">Clientes <span class="text-gray-400 font-normal text-lg">/ Cadastro Geral</span></h1>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                <p class="text-gray-500 mb-4 text-sm">Lista de compradores integrados ao sistema de catálogos.</p>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead>
+                            <tr class="border-b bg-slate-50 text-gray-400 font-bold uppercase text-xs">
+                                <th class="py-3 px-4">Nome</th>
+                                <th class="py-3 px-4">E-mail</th>
+                                <th class="py-3 px-4">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <tr>
+                                <td class="py-4 px-4 font-semibold text-slate-700">João Silva</td>
+                                <td class="py-4 px-4 text-gray-500">joao.silva@email.com</td>
+                                <td class="py-4 px-4"><span class="bg-green-100 text-green-800 text-xs px-2.5 py-1 rounded-md font-medium">Ativo</span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-4 font-semibold text-slate-700">Maria Souza</td>
+                                <td class="py-4 px-4 text-gray-500">maria.souza@email.com</td>
+                                <td class="py-4 px-4"><span class="bg-green-100 text-green-800 text-xs px-2.5 py-1 rounded-md font-medium">Ativo</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="conteudo-produtos" class="secao-conteudo secao-oculta grid grid-cols-1 lg:grid-cols-3 gap-8">
             <section class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 lg:col-span-1 h-fit">
                 <h2 class="text-lg font-bold text-primaria mb-4">Adicionar ao Catálogo</h2>
                 <form id="produtoForm" class="space-y-4">
@@ -72,9 +153,9 @@
                     <div>
                         <label class="block text-xs font-semibold text-gray-500 uppercase mb-1">Status Inicial</label>
                         <select id="status" class="w-full px-3 py-2 bg-slate-50 border border-gray-200 rounded-lg focus:outline-none focus:border-secundaria transition">
-                            <option value="RASCUNHO">RASCUNHO (Em criação)</option>
-                            <option value="ATIVO" selected>ATIVO (Visível no catálogo)</option>
-                            <option value="INATIVO">INATIVO (Oculto temporariamente)</option>
+                            <option value="RASCUNHO">RASCUNHO</option>
+                            <option value="ATIVO" selected>ATIVO</option>
+                            <option value="INATIVO">INATIVO</option>
                         </select>
                     </div>
                     <button type="submit" class="w-full bg-secundaria hover:bg-sky-600 text-white font-semibold py-2.5 rounded-lg shadow-sm transition mt-2">
@@ -84,7 +165,7 @@
             </section>
 
             <section class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 lg:col-span-2">
-                <h2 class="text-lg font-bold text-primaria mb-4">Últimas Atividades</h2>
+                <h2 class="text-lg font-bold text-primaria mb-4">Gerenciamento de Produtos</h2>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
@@ -103,6 +184,22 @@
                 </div>
             </section>
         </div>
+
+        <div id="conteudo-configuracoes" class="secao-conteudo secao-oculta space-y-6">
+            <h1 class="text-2xl font-bold text-primaria">Configurações <span class="text-gray-400 font-normal text-lg">/ Sistema</span></h1>
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 space-y-4">
+                <div>
+                    <h3 class="font-semibold text-slate-700">Configuração da API</h3>
+                    <p class="text-sm text-gray-400">Endpoint conectado: <code class="bg-slate-100 px-1.5 py-0.5 rounded text-red-500">http://localhost:8080/produtos</code></p>
+                </div>
+                <hr class="border-gray-100">
+                <div>
+                    <h3 class="font-semibold text-slate-700">Modo de Operação</h3>
+                    <p class="text-sm text-gray-500">A aplicação está operando em modo híbrido de validação de persistência.</p>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <script src="app.js"></script>

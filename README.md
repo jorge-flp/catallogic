@@ -1,6 +1,6 @@
-# 🛒 Catallogic - Sistema de Catálogo Digital
+# 🛒 Innexa - Sistema de Catálogo Digital
 
-O **Catallogic** é um ecossistema completo de gerenciamento de catálogo digital. O projeto é composto por uma API REST robusta desenvolvida em camadas com **Spring Boot** e uma interface administrativa ágil de página única (**SPA**) construída com HTML5 moderno, JavaScript Assíncrono e estilização baseada na identidade visual corporativa do sistema.
+A **Innexa** é um ecossistema completo de gerenciamento de catálogo digital. O projeto é composto por uma API REST robusta desenvolvida em camadas com **Spring Boot** e uma interface administrativa ágil de página única (**SPA**) construída com HTML5 moderno, JavaScript Assíncrono e estilização baseada na identidade visual corporativa do sistema.
 
 ---
 
@@ -32,7 +32,7 @@ O repositório está organizado para manter o código do servidor isolado da cam
 │   ├── .mvn/wrapper/                # Inicializadores do Maven Wrapper
 │   ├── mvnw.cmd                     # Executável do Maven para Windows
 │   ├── pom.xml                      # POM com todas as dependências do projeto
-│   └── src/main/java/com/catallogic/
+│   └── src/main/java/com/innexa/
 │       ├── api/
 │       │   └── ApiApplication.java  # Classe principal de inicialização
 │       ├── controller/              # Endpoints HTTP da API
@@ -42,7 +42,7 @@ O repositório está organizado para manter o código do servidor isolado da cam
 │       ├── repository/              # Interfaces de comunicação com o JPA
 │       └── service/                 # Camada contendo as Regras de Negócio
 │
-└── cattalogic-front/                # DIRETÓRIO DO FRONT-END (Web SPA)
+└── front-end/                # DIRETÓRIO DO FRONT-END (Web SPA)
     ├── index.html                   # Painel Geral Administrativo (Single Page Application)
     ├── login.html                   # Tela de Controle de Acesso
     ├── cadastro.html                # Tela de Criação de Contas de Operadores
